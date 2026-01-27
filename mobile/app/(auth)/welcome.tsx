@@ -14,6 +14,7 @@ const Welcome = () => {
     return (
         <ScreenWrapper
         showPattern={true}
+        bgOpacity={0.5}
         >
             <View
             style={styles.container}
