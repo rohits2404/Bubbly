@@ -15,6 +15,7 @@ import { Button } from '@/components/Button'
 import { useRouter } from 'expo-router'
 import { updateProfile } from '@/socket/socketEvents'
 import * as ImagePicker from 'expo-image-picker';
+import { uploadFileToCloudinary } from '@/services/imageService'
 
 const Profile = () => {
 
@@ -63,7 +64,18 @@ const Profile = () => {
             return;
         }
         let data = { name, avatar };
-        setLoading(true);
+        if(avatar && avatar?.uri) {
+            setLoading(true);
+            const res = await uploadFileToCloudinary(avatar, "profiles")
+            console.log("Result", res);
+            if(res.success) {
+                data.avatar = res.data
+            } else {
+                Alert.alert("User", res.msg);
+                setLoading(false);
+                return
+            }
+        }
         updateProfile(data);
     }
 
