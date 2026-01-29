@@ -6,6 +6,7 @@ import http from "http";
 import { connectDB } from "./config/db";
 
 import authRoutes from "./routes/auth.route";
+import { initializeSocket } from "./socket/socket";
 
 const app = express();
 
@@ -21,6 +22,8 @@ app.use("/api/auth", authRoutes);
 const PORT = process.env.PORT || 3000;
 
 const server = http.createServer(app);
+
+initializeSocket(server);
 
 connectDB().then(() => {
     server.listen(PORT, () => {
