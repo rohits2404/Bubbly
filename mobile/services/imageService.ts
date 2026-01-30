@@ -11,7 +11,7 @@ export const getAvatarPath = (file: any, isGroup = false) => {
     if(isGroup) {
         return require("@/assets/images/defaultGroupAvatar.png")
     }
-    require("@/assets/images/defaultAvatar.png")
+    return require("@/assets/images/defaultAvatar.png")
 }
 
 const CLOUDINARY_API_URL = `https://api.cloudinary.com/v1_1/${process.env.EXPO_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`
